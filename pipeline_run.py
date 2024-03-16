@@ -8,7 +8,7 @@ pipelineDirectory = os.path.dirname(os.path.abspath(__file__))
 todayDate = datetime.datetime.today()
 
 
-class RunScrapers(luigi.task):
+class RunScrapers(luigi.Task):
     
     
     scraperOutputFile = os.path.join(pipelineDirectory, "ScraperWorkFlow", "Output", "scraperOutput_"+todayDate.strftime("%d-%m-%Y")+".csv")
@@ -18,8 +18,9 @@ class RunScrapers(luigi.task):
         return luigi.LocalTarget(self.scraperOutputFile)
     
     def run(self):
-        mainWorkFlow()
         
+        output = mainWorkFlow()
+        output.to_csv(self.scraperOutputFile, index=False)
         
         
 

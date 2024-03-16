@@ -1,0 +1,1 @@
+echo PASSWORD | sudo -S python3 -m luigi --module pipeline_run RunScrapers --local-scheduler
